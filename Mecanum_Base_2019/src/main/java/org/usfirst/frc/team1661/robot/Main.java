@@ -47,7 +47,7 @@ import com.kauailabs.navx.frc.AHRS;
  * Designed for Power Up- FRC 2018
  */
  
-public class Main extends IterativeRobot {
+public class Main extends TimedRobot {
 
 	String testingGit = "This is another test.";
 	String testAgain = "please work";
