@@ -13,10 +13,10 @@ package org.usfirst.frc.team1661.robot;
  * 		The version will be listed on the configurer- compare it to the latest build!
  * 	Make sure the code isn't broken- wpilib changes things every year!
  */
-// Hiya
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
+
+// import java.io.File;
+// import java.io.FileOutputStream;
+// import java.io.ObjectOutputStream;
 import java.io.Serializable;
 /**
  * Imports
