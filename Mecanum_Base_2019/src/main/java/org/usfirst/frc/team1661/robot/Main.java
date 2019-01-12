@@ -50,6 +50,7 @@ import com.kauailabs.navx.frc.AHRS;
 public class Main extends IterativeRobot {
 
 	String testingGit = "This is another test.";
+	String testAgain = "please work";
 	/**
 	 * WPI_TalonSRX are CANTalons that are accepted by the MecanumDrive method.
 	 * The Talon IDs match the ones found at RIO configuration (http://roborio-1661-frc.local)
