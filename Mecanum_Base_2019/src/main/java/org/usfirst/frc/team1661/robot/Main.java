@@ -13,7 +13,7 @@ package org.usfirst.frc.team1661.robot;
  * 		The version will be listed on the configurer- compare it to the latest build!
  * 	Make sure the code isn't broken- wpilib changes things every year!
  */
-// Change Test
+
 // import java.io.File;
 // import java.io.FileOutputStream;
 // import java.io.ObjectOutputStream;
@@ -48,25 +48,6 @@ import com.kauailabs.navx.frc.AHRS;
  */
  
 public class Main extends TimedRobot {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-	String testingGit = "This is another test.";
-	String testAgain = "please work";
-	String testAgainAgain = "great test";
-=======
-	boolean youSeeThis = true;
-	String testingGit = "This is another test.";
-	String testAgain = "please work";
-	String testAgainAgain = "real swell test";
-	String testAgainAgain = "confusing test";
->>>>>>> f3c5287ea020216d57f9b58c055de9b3a7c70357
-=======
-	char deleteMe = 'x';
->>>>>>> 0b6f62793bb9f249ea86ed96656fb8f2a2591ccb
-=======
->>>>>>> b802f2aa252f4933aff12d2726fd3627e11484fe
 	/**
 	 * WPI_TalonSRX are CANTalons that are accepted by the MecanumDrive method.
 	 * The Talon IDs match the ones found at RIO configuration (http://roborio-1661-frc.local)
