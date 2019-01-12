@@ -51,7 +51,7 @@ public class Main extends TimedRobot {
 
 	String testingGit = "This is another test.";
 	String testAgain = "please work";
-	String testAgainAgain = "good test";
+	String testAgainAgain = "terrible test";
 	/**
 	 * WPI_TalonSRX are CANTalons that are accepted by the MecanumDrive method.
 	 * The Talon IDs match the ones found at RIO configuration (http://roborio-1661-frc.local)
