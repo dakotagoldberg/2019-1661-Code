@@ -43,6 +43,8 @@ import com.kauailabs.navx.frc.AHRS;
 // JAVADOCS: http://first.wpi.edu/FRC/roborio/release/docs/java/
 // BUILD INSTRUCTIONS: https://wpilib.screenstepslive.com/s/currentCS/m/79833/l/932465-creating-a-robot-program
 
+// Setting up commiting through GitHub and not local device (dakota)
+
 /**
  * @author Nate Tausik & The Power of Friendship
  * @team   Griffitrons #1661
