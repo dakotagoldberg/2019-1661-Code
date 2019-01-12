@@ -14,10 +14,12 @@ package org.usfirst.frc.team1661.robot;
  * 	Make sure the code isn't broken- wpilib changes things every year!
  */
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
+// import java.io.File;
+// import java.io.FileOutputStream;
+// import java.io.ObjectOutputStream;
 import java.io.Serializable;
+
+
 /**
  * Imports
  * Most come from wpilib
@@ -27,15 +29,19 @@ import java.io.Serializable;
 import java.util.*;
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.GenericHID.Hand;
-import edu.wpi.first.wpilibj.GenericHID.RumbleType;
+// import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
-import edu.wpi.first.wpilibj.hal.PowerJNI;
+import edu.wpi.first.hal.PowerJNI;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
+
+// GRADLE GITHUB HERE: https://github.com/wpilibsuite/GradleRIO
+// JAVADOCS: http://first.wpi.edu/FRC/roborio/release/docs/java/
+// BUILD INSTRUCTIONS: https://wpilib.screenstepslive.com/s/currentCS/m/79833/l/932465-creating-a-robot-program
 
 /**
  * @author Nate Tausik & The Power of Friendship
@@ -46,11 +52,7 @@ import com.kauailabs.navx.frc.AHRS;
  * Interfaces with custom dashboard adapted from FRCDashboard
  * Designed for Power Up- FRC 2018
  */
- 
-public class Main extends IterativeRobot {
-
-	String testingGit = "This is another test.";
-	String testAgain = "please work";
+public class Main extends TimedRobot { /*Replaced IterativeRobot with TimedRobot*/
 	/**
 	 * WPI_TalonSRX are CANTalons that are accepted by the MecanumDrive method.
 	 * The Talon IDs match the ones found at RIO configuration (http://roborio-1661-frc.local)
@@ -60,15 +62,6 @@ public class Main extends IterativeRobot {
 	WPI_TalonSRX bLeft = new WPI_TalonSRX(1);
 	WPI_TalonSRX fRight = new WPI_TalonSRX(2);
 	WPI_TalonSRX bRight = new WPI_TalonSRX(3);
-
-	WPI_TalonSRX elev1 = new WPI_TalonSRX(4);
-	WPI_TalonSRX elev2 = new WPI_TalonSRX(5);
-	WPI_TalonSRX intake1 = new WPI_TalonSRX(6);
-	WPI_TalonSRX intake2 = new WPI_TalonSRX(7);
-	WPI_TalonSRX iRotate = new WPI_TalonSRX(8);
-	WPI_TalonSRX climber1 = new WPI_TalonSRX(9);
-	WPI_TalonSRX climber2 = new WPI_TalonSRX(10);
-
 
 	/**
 	 * An instance of the driver station is used later to read game data, like match time and scale position.
@@ -242,11 +235,7 @@ public class Main extends IterativeRobot {
 		SmartDashboard.putNumber("totaldraw", PowerJNI.getVinCurrent());
 		SmartDashboard.putNumber("drivedraw", fLeft.getOutputCurrent() + bLeft.getOutputCurrent() 
 		+ fRight.getOutputCurrent() + bRight.getOutputCurrent());
-		SmartDashboard.putNumber("intakedraw", intake1.getOutputCurrent() + intake2.getOutputCurrent());
-		SmartDashboard.putNumber("intakerotatedraw", iRotate.getOutputCurrent());
-		SmartDashboard.putNumber("elevatordraw", elev1.getOutputCurrent() + elev2.getOutputCurrent());
-		SmartDashboard.putNumber("climberdraw", climber1.getOutputCurrent() + climber2.getOutputCurrent());
-
+	
 		/**
 		 * These are mostly here for fun. They are read from the gyro and are kind of cool.
 		 */
@@ -318,11 +307,7 @@ public class Main extends IterativeRobot {
 		 * The closer loop ramp rate describes the time it should take for a motor to reach the desired speed.
 		 * This can be used to smooth the movement of a motor, particularly a powerful one like a 775.
 		 */
-		elev1.configClosedloopRamp(1.5, 0);
-		elev2.configClosedloopRamp(1.5, 0);
 
-		climber1.configClosedloopRamp(25, 0);
-		climber2.configClosedloopRamp(25, 0);
 	}
 
 	/**
@@ -380,14 +365,7 @@ public class Main extends IterativeRobot {
 			SmartDashboard.putNumber("blDrive", bLeft.get() * 100);
 			SmartDashboard.putNumber("brDrive", -bRight.get() * 100); 
 		}
-		/**
-		 * The rest of the motor values are sent to the dashboard only one of each type is sent for the simplicity
-		 * of the dashboard.
-		 */
-		SmartDashboard.putNumber("intake", intake1.get() * 100);
-		SmartDashboard.putNumber("intakerotate", iRotate.get() * 100);
-		SmartDashboard.putNumber("elevator", elev1.get() * 100);
-		SmartDashboard.putNumber("climber", climber1.get() * 100);
+
 
 		/**
 		 * The current match time and auto status are sent to the dashboard for the countdown timer.
@@ -402,10 +380,6 @@ public class Main extends IterativeRobot {
 		SmartDashboard.putNumber("totaldraw", PowerJNI.getVinCurrent());
 		SmartDashboard.putNumber("drivedraw", fLeft.getOutputCurrent() + bLeft.getOutputCurrent() 
 		+ fRight.getOutputCurrent() + bRight.getOutputCurrent());
-		SmartDashboard.putNumber("intakedraw", intake1.getOutputCurrent() + intake2.getOutputCurrent());
-		SmartDashboard.putNumber("intakerotatedraw", iRotate.getOutputCurrent());
-		SmartDashboard.putNumber("elevatordraw", elev1.getOutputCurrent() + elev2.getOutputCurrent());
-		SmartDashboard.putNumber("climberdraw", climber1.getOutputCurrent() + climber2.getOutputCurrent());
 
 		/**
 		 * These bonus data pieces are also continuously updated on the smart dashboard.
@@ -487,7 +461,6 @@ public class Main extends IterativeRobot {
 			/**
 			 * The intake is always lowered when the match starts.
 			 */
-			lowerIntake();
 			/**
 			 * Describes the auto possibilities when the robot starts to the left.
 			 */
@@ -505,10 +478,8 @@ public class Main extends IterativeRobot {
 					 */
 					if(scale1Left) {
 						autoDrive(14);
-						partialRaiseElev();
 						autoRotate(90);
 						autoDrive(4);
-						fire();
 						/**
 						 * Places on the left scale. Since this is pants, it will only do this if the switch is 
 						 * unavailable. It performs a similar operation, but the intake must be fully raised and
@@ -516,11 +487,8 @@ public class Main extends IterativeRobot {
 						 */
 					}else if(scale2Left) {
 						autoDrive(25);
-						raiseElev();
 						autoRotate(45);
-						aim();
 						autoDrive(5);
-						fire();
 						/**
 						 * If neither the scale nor the switch is available, the robot will cross the baseline.
 						 */
@@ -535,17 +503,12 @@ public class Main extends IterativeRobot {
 					 */
 					if(scale2Left) {
 						autoDrive(25);
-						raiseElev();
 						autoRotate(45);
-						aim();
 						autoDrive(5);
-						fire();
 					}else if(scale1Left) {
 						autoDrive(14);
-						partialRaiseElev();
 						autoRotate(90);
 						autoDrive(4);
-						fire();
 					}else {
 						autoDrive(14);
 					}
@@ -559,18 +522,14 @@ public class Main extends IterativeRobot {
 					autoDrive(5);
 					autoRotate(-90);
 					autoDrive(5.0);
-					partialRaiseElev();
 					autoRotate(90);
 					autoDrive(7.5);
-					fire();
 				}else {
 					autoDrive(5);
 					autoRotate(90);
 					autoDrive(5.0);
-					partialRaiseElev();
 					autoRotate(-90);
 					autoDrive(7.5);
-					fire();
 				}
 			}else {
 				/**
@@ -580,35 +539,25 @@ public class Main extends IterativeRobot {
 				if(pants) {
 					if(!scale1Left) {
 						autoDrive(14);
-						partialRaiseElev();
 						autoRotate(-90);
 						autoDrive(4);
-						fire();
 					}
 					else if(!scale2Left) {
 						autoDrive(25);
-						raiseElev();
 						autoRotate(-45);
-						aim();
 						autoDrive(5);
-						fire();
 					}else {
 						autoDrive(14);
 					}
 				}else {
 					if(!scale2Left) {
 						autoDrive(25);
-						raiseElev();
 						autoRotate(-45);
-						aim();
 						autoDrive(5);
-						fire();
 					}else if(!scale1Left) {
 						autoDrive(14);
-						partialRaiseElev();
 						autoRotate(-90);
 						autoDrive(4);
-						fire();
 					}else {
 						autoDrive(14);
 					}
@@ -645,7 +594,7 @@ public class Main extends IterativeRobot {
 		/**
 		 * Motors that had to be inverted for auto are un-inverted.
 		 * It is worth noting that I am still unaware as to why some motors act like this.
-		 * If you can figure it out, get yourself a cookie.
+		 * If you can figure it out, I will get you a cookie.
 		 */
 		fRight.setInverted(false);
 		bRight.setInverted(false);
@@ -661,7 +610,8 @@ public class Main extends IterativeRobot {
 		/**
 		 * Our main goal is to translate the xy coordinates from the XBox controller and turn it into polar coordinates.
 		 * rawaxis0 is left-right on the left stick, and rawaxis1 is the up-down
-		 * The distance between two points formula is used to find the magnitude of the movement.
+		 * The distance between two points formula is used to find 
+		 * the magnitude of the movement.
 		 * The movement is ignored if the magnitude is below 25% of maximum, since the sticks do not rest perfectly at 0.
 		 * At the time of writing this code, the y axis is inexplicably inverted on XBox controllers, hence the (-).
 		 */
@@ -722,88 +672,13 @@ public class Main extends IterativeRobot {
 		else
 			myRobot.drivePolar(mag, theta, rotation * 0.75);
 
-		/**
-		 * P2's triggers control the intake. Right for in, left for out. 
-		 * The speed mirrors the amount the trigger is pressed.
-		 * The intake can also be controlled using P2's A and B buttons, which make it move at full power.
-		 * 775s have a tendency to overheat when stalled, so a current limit is used to prevent this from happening.
-		 * A small deadzone is added as usual.
-		 * When the intake is not being moved, the motors very slightly stall inward to keep the cube in place.
-		 */
-		if(cubeController.getTriggerAxis(Hand.kRight) > 0.2 && intake1.getOutputCurrent() < INTAKE_CURRENT_LIMIT
-				&& intake2.getOutputCurrent() < INTAKE_CURRENT_LIMIT) {
-			intake1.set(cubeController.getTriggerAxis(Hand.kRight));
-			intake2.set(-cubeController.getTriggerAxis(Hand.kRight));
-		}else if(cubeController.getTriggerAxis(Hand.kLeft) > 0.2 && intake1.getOutputCurrent() < INTAKE_CURRENT_LIMIT
-				&& intake2.getOutputCurrent() < INTAKE_CURRENT_LIMIT) {
-			intake1.set(-cubeController.getTriggerAxis(Hand.kLeft));
-			intake2.set(cubeController.getTriggerAxis(Hand.kLeft));
-		}else if(cubeController.getAButton() && intake1.getOutputCurrent() < INTAKE_CURRENT_LIMIT
-				&& intake2.getOutputCurrent() < INTAKE_CURRENT_LIMIT) {
-			intake1.set(1.00);
-			intake2.set(-1.00);
-		}else if(cubeController.getBButton() && intake1.getOutputCurrent() < INTAKE_CURRENT_LIMIT
-				&& intake2.getOutputCurrent() < INTAKE_CURRENT_LIMIT) {
-			intake1.set(-1.00);
-			intake2.set(1.00);
-		}else {
-			intake1.set(0.0);
-			intake2.set(0.0);
-		}
+		
 
-		/**
-		 * P1's triggers control the elevator. 
-		 * Like always, a deadzone is added to the controls.
-		 * There is also a limit switch and a current limit that will prevent the elevator from breaking itself.
-		 * Finally, we slightly stall the motors when the elevator is inactive. This ensures it will not slip.
-		 */
-		if(driveController.getTriggerAxis(Hand.kRight) > 0.2 && upperLim.get() 
-				&& elev1.getOutputCurrent() < ELEV_CURRENT_LIMIT && elev2.getOutputCurrent() < ELEV_CURRENT_LIMIT) {
-			elev1.set(-driveController.getTriggerAxis(Hand.kRight));
-			elev2.set(-driveController.getTriggerAxis(Hand.kRight));
-		}else if(driveController.getTriggerAxis(Hand.kLeft) > 0.2 && lowerLim.get()
-				&& elev1.getOutputCurrent() < ELEV_CURRENT_LIMIT && elev2.getOutputCurrent() < ELEV_CURRENT_LIMIT) {
-			elev1.set(driveController.getTriggerAxis(Hand.kLeft) * 0.8);
-			elev2.set(driveController.getTriggerAxis(Hand.kLeft) * 0.8);
-		}else {
-			elev1.set(-0.05);
-			elev2.set(-0.05);
-		}
 
-		/**
-		 * P1's A Button controls the elevator.
-		 * Activates climber. Can only be turned on if in the last 30 seconds of the match to prevent accidental usage.
-		 * Like with the intake motors, a current limit is placed to prevent the motors from overheating.
-		 */
-		if(driveController.getAButton() && ds.getMatchTime() <= 30 
-				&& climber1.getOutputCurrent() <= CLIMB_CURRENT_LIMIT 
-				&& climber2.getOutputCurrent() <= CLIMB_CURRENT_LIMIT) {
-			climber1.set(-1.0);
-			climber2.set(-1.0);
-			driveController.setRumble(RumbleType.kLeftRumble, 1.0);
-			driveController.setRumble(RumbleType.kRightRumble, 1.0);
-			cubeController.setRumble(RumbleType.kLeftRumble, 1.0);
-			cubeController.setRumble(RumbleType.kRightRumble, 1.0);
-		}else {
-			climber1.set(0);
-			climber2.set(0);
-			driveController.setRumble(RumbleType.kLeftRumble, 0);
-			driveController.setRumble(RumbleType.kRightRumble, 0);
-			cubeController.setRumble(RumbleType.kLeftRumble, 0);
-			cubeController.setRumble(RumbleType.kRightRumble, 0);
-		}
 
-		/**
-		 * Pivots the intake mechanism using the D Pad.
-		 * Like with the intake, the pivot motor stalls slightly by default to keep the intake in place.
-		 * This sketchy solution can be replaced with PID if the time is available.
-		 */
-		if(cubeController.getPOV(0) != -1 && (cubeController.getPOV(0) >= 315 || cubeController.getPOV(0) <= 45))
-			iRotate.set(.5); 
-		else if(cubeController.getPOV(0) != -1 && cubeController.getPOV(0) >= 135 && cubeController.getPOV(0) <= 225)
-			iRotate.set(-.5);
-		else
-			iRotate.set(0.05);
+
+
+
 	}
 
 	/**
@@ -946,9 +821,9 @@ public class Main extends IterativeRobot {
 		 * SetpointCount is a somewhat arbitrary variable defined further up which was messed with to find a setting
 		 * that was both smooth and relatively quick. It is the number of subdivisions the setpoint becomes.
 		 * 
-		 * SIDENOTE: The total time an autonomous move will take can be found by multiplying the setpoint count
-		 * by the sleep time and then adding the 500 ms delay at the end. Convert to seconds by / 1000.
-		 * For example, each forward or backward movement should take (25 * 25 + 500) / 1000 = 1.125 seconds!
+		 * SIDENOTE: The total time an autonomous move will take can be found by multiplying the sleep time
+		 * by the setpoint count and then adding the 500 ms delay at the end. Convert to seconds by / 1000.
+		 * For example, each forward or backward movement should take (25 * 75 + 500) / 1000 = 2.375 seconds!
 		 */
 		for (int i = 1; i <= setpointCount; i++) {
 			fLeftPID.setSetpoint(((i * d) / setpointCount) * SETPOINT_TO_FEET);
@@ -1023,170 +898,13 @@ public class Main extends IterativeRobot {
 		} catch(InterruptedException e) {}
 	}
 
-	/**
-	 * This method is called during autonomous, and raises the elevator to about its maximum height.
-	 * The method's contents are wrapped in a thread so this action will happen while the robot continues to drive
-	 * or rotate. This saves large amounts of time during autonomous. 
-	 */
-	public void raiseElev() {
-		new Thread(() -> {
-			/**
-			 * Despite the inclusion of a limit switch, a timer is used to make sure that the elevator does not 
-			 * continuously stall at the top. Knowing this team, adding electronic stops to compliment mechanical
-			 * ones is highly recommended whenever possible.
-			 */
-			Timer time = new Timer();
-			time.start();
-			time.reset();
+	
 
-			/**
-			 * The elevator will continue to climb as long as the limit switch has not been hit and the timer has not
-			 * been running for 4.5 seconds or more. 
-			 */
-			while(upperLim.get() && time.get() < 4.5) {
-				/**
-				 * This current limit is once again checked to ensure the elevator does not stall and our motors do not
-				 * break. If this happens, they will immediately stop. 
-				 */
-				if(elev1.getOutputCurrent() < ELEV_CURRENT_LIMIT && elev2.getOutputCurrent() < ELEV_CURRENT_LIMIT) {
-					elev1.set(-0.4);
-					elev2.set(-0.4);
-				}else {
-					elev1.set(0.0);
-					elev2.set(0.0);
-				}
-			}
 
-			/**
-			 * After the elevator has reached the top, it will slightly stall to prevent it from falling back down.
-			 * This stall is not enough to damage the motors, but will keep the elevator in place.
-			 */
-			elev1.set(-0.05);
-			elev2.set(-0.05);
-			time.stop();
-		}).start();
-	}
 
-	/**
-	 * Partial raise elevator functions almost identically to raise elevator, but it is only active for 1.5 seconds.
-	 * The purpose of this method is to save time when placing on the switch in autonomous, as there is no need to
-	 * raise the elevator fully.
-	 * It is also in a thread so it can act parallel with driving.
-	 */
-	public void partialRaiseElev() {
-		new Thread(() -> {
-			Timer time = new Timer();
-			time.start();
-			time.reset();
-			while(upperLim.get() && time.get() < 1.5) {
-				if(elev1.getOutputCurrent() < ELEV_CURRENT_LIMIT && elev2.getOutputCurrent() < ELEV_CURRENT_LIMIT) {
-					elev1.set(-0.4);
-					elev2.set(-0.4);
-				}else {
-					elev1.set(0.0);
-					elev2.set(0.0);
-				}
-			}
-			elev1.set(-0.05);
-			elev2.set(-0.05);
-			time.stop();
-		}).start();
-	}
 
-	/**
-	 * This method can be called during autonomous and once again functions similarly to the other elevator methods.
-	 * Notable differences are that the elevator now moves down instead of up, it moves slightly faster, and it moves
-	 * for significantly less time.
-	 * It is also in a thread so it can act parallel with driving. 
-	 * SIDENOTE: This method was not used during the season. This means it is mostly untested. In reflection of some
-	 * problems during the season, it would probably be wise to lower the speed and raise the time allotted for 
-	 * the lowering process.
-	 */
-	public void lowerElev() {
-		new Thread(() -> {
-			Timer time = new Timer();
-			time.start();
-			time.reset();
-			while(lowerLim.get() && time.get() < 1.9) {
-				if(elev1.getOutputCurrent() < ELEV_CURRENT_LIMIT && elev2.getOutputCurrent() < ELEV_CURRENT_LIMIT) {
-					elev1.set(0.6);
-					elev2.set(0.6);
-				}else {
-					elev1.set(0.0);
-					elev2.set(0.0);
-				}
-			}
-			elev1.set(-0.05);
-			elev2.set(-0.05);
-			time.stop();
-		}).start();
-	}
 
-	/**
-	 * This method is called during autonomous, and lowers the intake at the start of the match.
-	 * It functions similarly to the elevator methods with a few key differences. 
-	 * There is no fear of breaking the intake when lowering it, so there it relies solely on the timer to stop it.
-	 * It also does not need a current limit, as simply lowering the intake has no chance of stalling. 
-	 * Like with many other methods, it uses a thread so it can run parallel to driving, and stalls slightly to hold
-	 * its position.
-	 */
-	public void lowerIntake() {
-		new Thread(() -> {
-			Timer time = new Timer();
-			time.start();
-			time.reset();
-			while(time.get() < .8) {
-				iRotate.set(-0.5);
-			}
-			iRotate.set(0.05);
-			time.stop();
-		}).start();
-	}
 
-	/**
-	 * The aim method brings the intake back up half way. This is done so a cube can be placed on the scale in 
-	 * autonomous, even if the scale was already taken by the other team. It gives a small amount of extra height.
-	 * The method raises the intake for 1 second, which was experimentally calculated to be around the time required
-	 * to bring the mechanism half way. Afterwards, it is slightly stalled to hold its position.
-	 * Like many other methods, it is placed in its own thread so it will occur in parallel with driving.
-	 */
-	public void aim() {
-		new Thread(() -> {
-			Timer time = new Timer();
-			time.start();
-			time.reset();
-			while(time.get() < 1.0) {
-				iRotate.set(0.5);
-			}
-			iRotate.set(0.05);
-			time.stop();
-		}).start();
-	}
-
-	/**
-	 * The fire method is called during autonomous and is used to fire a cube onto the switch or scale.
-	 * It works similarly to all other autonomous mechanism control.
-	 * The movement of the intake is the safest of all as it can move indefinitely without reaching an end or breaking.
-	 * As a result, and because this is always the last autonomous action, the timer goes on for much longer than it
-	 * has to. A current limit is still used in case a cube gets stuck and the motors begin to stall. It will prevent
-	 * the possible destruction of the motors. The intake is not stalled at the end because why would you?
-	 */
-	public void fire() {
-		Timer time = new Timer();
-		time.start();
-		time.reset();
-		while(time.get() < 1.5) {
-			if(intake1.getOutputCurrent() < INTAKE_CURRENT_LIMIT && intake2.getOutputCurrent() < INTAKE_CURRENT_LIMIT) {
-				intake1.set(-1.0);
-				intake2.set(1.0);
-			}else {
-				intake1.set(0.0);
-				intake2.set(0.0);
-			}
-		}
-		intake1.set(0.0);
-		intake2.set(0.0);
-	}
 
 	/**
 	 * 
@@ -1234,9 +952,3 @@ public class Main extends IterativeRobot {
 		}
 	}
 }
-© 2019 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
