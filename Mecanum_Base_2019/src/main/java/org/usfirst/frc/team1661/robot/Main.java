@@ -48,14 +48,11 @@ import com.kauailabs.navx.frc.AHRS;
  */
  
 public class Main extends TimedRobot {
-<<<<<<< HEAD
 	boolean youSeeThis = true;
 	String testingGit = "This is another test.";
 	String testAgain = "please work";
 	String testAgainAgain = "real swell test";
 	String testAgainAgain = "confusing test";
-=======
->>>>>>> 3ce624de98313cee357817111157a60063f2857b
 	/**
 	 * WPI_TalonSRX are CANTalons that are accepted by the MecanumDrive method.
 	 * The Talon IDs match the ones found at RIO configuration (http://roborio-1661-frc.local)
