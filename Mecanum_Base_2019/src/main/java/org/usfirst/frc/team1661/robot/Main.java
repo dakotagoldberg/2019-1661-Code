@@ -48,7 +48,7 @@ import com.kauailabs.navx.frc.AHRS;
  */
  
 public class Main extends TimedRobot {
-
+	boolean youSeeThis = true;
 	String testingGit = "This is another test.";
 	String testAgain = "please work";
 	String testAgainAgain = "real swell test";
