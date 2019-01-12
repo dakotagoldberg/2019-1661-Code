@@ -1231,9 +1231,3 @@ public class Main extends TimedRobot {
 		}
 	}
 }
-© 2019 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
