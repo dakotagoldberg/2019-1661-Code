@@ -18,6 +18,7 @@ package org.usfirst.frc.team1661.robot;
 // import java.io.FileOutputStream;
 // import java.io.ObjectOutputStream;
 import java.io.Serializable;
+String test = "testing the GitHub";
 /**
  * Imports
  * Most come from wpilib
